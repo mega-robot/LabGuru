@@ -15,6 +15,9 @@ import {
 } from "lucide-react";
 import SoftwareChatBot from "@/components/software/SoftwareChatBot";
 
+const API_BASE = import.meta.env.VITE_API_BASE_URL;
+
+
 /* ===================== TYPES ===================== */
 
 interface Hint {
@@ -59,7 +62,7 @@ int main() {
     setShowCorrectedCode(false);
 
     try {
-      const res = await fetch("http://localhost:5000/api/analyze", {
+      const res = await fetch(`${API_BASE}/api/analyze`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ code, language }),

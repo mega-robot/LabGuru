@@ -2,6 +2,8 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { X, Send } from "lucide-react";
+const API_BASE = import.meta.env.VITE_API_BASE_URL;
+
 
 interface HardwareChatBotProps {
   isOpen: boolean;
@@ -60,7 +62,7 @@ const HardwareChatBot = ({
     setLoading(true);
 
     try {
-      const res = await fetch("http://localhost:5000/api/hardware-chat", {
+      const res = await fetch(`${API_BASE}/api/hardware-chat`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -125,7 +127,7 @@ const HardwareChatBot = ({
           : "bg-muted"
       }`}
     >
-      {m.content}
+      {renderFormattedText(m.content)}
     </div>
   ))}
 

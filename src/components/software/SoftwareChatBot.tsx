@@ -3,6 +3,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
+const API_BASE = import.meta.env.VITE_API_BASE_URL;
+
+
 interface SoftwareChatBotProps {
   isOpen: boolean;
   onClose: () => void;
@@ -53,44 +56,45 @@ const SoftwareChatBot = ({
   }, [messages, loading]);
 
   const sendMessage = async () => {
-    if (!input.trim()) return;
+  if (!input.trim()) return;
 
-    const userMsg: Message = { role: "user", content: input };
-    setMessages((prev) => [...prev, userMsg]);
-    setInput("");
-    setLoading(true);
+  const userMsg: Message = { role: "user", content: input };
+  setMessages((prev) => [...prev, userMsg]);
+  setInput("");
+  setLoading(true);
 
-    try {
-      const res = await fetch("http://localhost:5000/api/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          code: codeContext,
-          question: input,
-        }),
-      });
+  try {
+    const res = await fetch(`${API_BASE}/api/chat`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        code: codeContext,
+        question: input,
+      }),
+    });
 
-      const data = await res.json();
+    const data = await res.json();
 
-      setMessages((prev) => [
-        ...prev,
-        {
-          role: "assistant",
-          content: data.reply || "No response received.",
-        },
-      ]);
-    } catch {
-      setMessages((prev) => [
-        ...prev,
-        {
-          role: "assistant",
-          content: "Something went wrong. Please try again.",
-        },
-      ]);
-    }
+    setMessages((prev) => [
+      ...prev,
+      {
+        role: "assistant",
+        content: data.reply || "No response received.",
+      },
+    ]);
+  } catch {
+    setMessages((prev) => [
+      ...prev,
+      {
+        role: "assistant",
+        content: "Something went wrong. Please try again.",
+      },
+    ]);
+  }
 
-    setLoading(false);
-  };
+  setLoading(false);
+};
+
 
   if (!isOpen) return null;
 
