@@ -7,6 +7,15 @@ The platform reduces dependency on physical lab availability while significantly
 
 ---
 
+## 🌐 Live Demo
+
+- **Frontend (Vercel):** https://lab-guru-m866lntpj-meghaiyer95-3655s-projects.vercel.app/
+- **Backend API (Render):** https://labguru.onrender.com  
+
+> ⚠️ The backend is an API-only server. Visiting the root URL may show `Cannot GET /`, which is expected.
+
+---
+
 ## ✨ Key Features
 
 ### 🔌 Hardware Labs (Digital Logic / ADLD)
@@ -44,7 +53,7 @@ The platform reduces dependency on physical lab availability while significantly
   - Common lab mistakes  
 - **Progressive hint system**:
   - Hints revealed one-by-one  
-  - Corrected code unlocked only after reviewing hints  
+  - Corrected code unlocked only after reviewing a minimum of 3 hints  
 - **Software AI Chatbot** for:
   - Code explanation  
   - Debugging help  
@@ -55,7 +64,7 @@ The platform reduces dependency on physical lab availability while significantly
 ## 🤖 AI Integration
 
 - Powered by **Google Gemini 2.5 Flash**
-- AI is used for:
+- Used for:
   - C code analysis and correction  
   - Hardware experiment explanations  
   - Interactive chatbot conversations  
@@ -66,32 +75,21 @@ The platform reduces dependency on physical lab availability while significantly
 
 ---
 
-## 🧰 Tech Stack
+## 🏗 System Architecture
 
-### 🎨 Frontend
-- React + TypeScript  
-- Vite  
-- Tailwind CSS  
-- Framer Motion  
-- Monaco Editor  
-- ShadCN UI  
-
-### 🛠 Backend
-- Node.js  
-- Express.js  
-- Google Gemini API  
-
-### ⚡ Simulation
-- Falstad Circuit Simulator (iframe-based)
-
-### 🚀 Deployment
-- **Frontend:** Vercel  
-- **Backend:** Node.js server (Render / Railway / similar)
-
+```text
+Frontend (React + Vite on Vercel)
+        |
+        | REST API Calls
+        v
+Backend (Node.js + Express on Render)
+        |
+        | Secure AI Requests
+        v
+Google Gemini 2.5 Flash
+```
 ---
-
-## 📁 Project Structure
-
+### 📁 Project Structure
 ```text
 LabGuru/
 │
@@ -119,35 +117,102 @@ LabGuru/
 ├── .env
 ├── package.json
 └── README.md
-
 ```
-## ⚙️ Local Setup
+---
+### 🔐 Environment Variables
+Frontend (Vercel / Local)
+Create a .env file in the project root:
+```text
+VITE_API_BASE_URL=https://labguru.onrender.com
+```
+Backend (Render / Local)
+Create a .env file inside the backend/ directory:
+```text
+GEMINI_API_KEY=your_gemini_api_key_here
+```
+---
+### ⚙️ Local Setup
 ### 1️⃣ Clone the Repository
 ```text
-git clone https://github.com/<your-username>/labguru.git
-cd labguru
+git clone https://github.com/mega-robot/LabGuru.git
+cd LabGuru
 ```
-
 ### 2️⃣ Frontend Setup
 ```text
 npm install
 npm run dev
 ```
 Frontend runs at:
+```text
 http://localhost:8080
+```
+Create .env in project root:
+```text
+VITE_API_BASE_URL=http://localhost:5000
+```
 
 ### 3️⃣ Backend Setup
 ```text
 cd backend
 npm install
-```
-Create a .env file inside backend/:
-```text
-GEMINI_API_KEY=your_api_key_here
-```
-Run backend:
-```text
 node index.js
 ```
+Create .env inside backend/:
+```text
+GEMINI_API_KEY=your_gemini_api_key_here
+```
 Backend runs at:
+```text
 http://localhost:5000
+```
+---
+### 🚀 Deployment Guide
+## Frontend (Vercel)
+1. Import GitHub repository into Vercel
+2. Framework Preset: Vite
+3. Build Command: npm run build
+4. Output Directory: dist
+5. Add Environment Variable:
+```text
+VITE_API_BASE_URL=https://labguru.onrender.com
+```
+6. Deploy
+
+### Backend (Render)
+1. Create a new Web Service
+2. Root Directory: backend
+3. Build Command: npm install
+4. Start Command: node index.js
+5. Add Environment Variable:
+```text
+GEMINI_API_KEY=your_gemini_api_key_here
+```
+6. Deploy
+---
+### 🔒 Security & Design Decisions
+1. Gemini API key is never exposed to the frontend
+2. All AI requests are routed through a secure backend
+3. Frontend uses environment-based API routing
+4. Backend validates and parses AI responses
+5. CORS is handled server-side
+
+---
+### 🧪 How It Works
+### Software Lab Flow
+Student writes C code
+Code is sent to backend /api/analyze
+Gemini returns structured hints and corrected code
+Hints unlock progressively
+Chatbot provides conceptual explanations
+
+### Hardware Lab Flow
+Student selects an experiment
+Circuit is simulated using Falstad
+Experiment context is sent to backend
+Hardware chatbot answers lab-specific questions
+Custom circuit design is supported
+
+
+---
+### 🏁 Conclusion
+LabGuru bridges the gap between theory and hands-on experimentation by combining virtual simulations with AI-powered guidance, making engineering labs more accessible, interactive, and effective.
