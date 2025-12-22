@@ -91,4 +91,58 @@ The platform aims to reduce dependency on physical lab availability while improv
 ---
 
 ## 📁 Project Structure
+LabGuru/
+│
+├── src/
+│ ├── pages/
+│ │ ├── HardwareLabs.tsx
+│ │ └── SoftwareLabs.tsx
+│ │
+│ ├── components/
+│ │ ├── hardware/
+│ │ │ └── HardwareChatBot.tsx
+│ │ │
+│ │ └── software/
+│ │ └── SoftwareChatBot.tsx
+│ │
+│ └── lib/
+│ └── gemini.ts
+│
+├── backend/
+│ └── index.js
+│
+├── public/
+│ └── images/
+│
+├── .env
+├── package.json
+└── README.md
 
+
+---
+
+## ⚙️ Local Setup
+
+### 1️⃣ Clone the Repository
+```bash
+git clone https://github.com/<your-username>/labguru.git
+cd labguru
+---
+### 2️⃣ Frontend Setup
+npm install
+npm run dev
+Frontend runs at:
+http://localhost:5173
+---
+###3️⃣ Backend Setup
+cd backend
+npm install
+Create a .env file inside backend/:
+GEMINI_API_KEY=your_api_key_here
+Run backend:
+node index.js
+---
+Backend runs at:
+http://localhost:5000
+
+---
