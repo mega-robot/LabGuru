@@ -9,7 +9,7 @@ The platform reduces dependency on physical lab availability while significantly
 
 ## 🌐 Live Demo
 
-- **Frontend (Vercel):** https://lab-guru-m866lntpj-meghaiyer95-3655s-projects.vercel.app/
+- **Frontend (Vercel):** https://lab-guru.vercel.app/
 - **Backend API (Render):** https://labguru.onrender.com  
 
 > ⚠️ The backend is an API-only server. Visiting the root URL may show `Cannot GET /`, which is expected.
